@@ -1,18 +1,28 @@
-const listeMots=["Cachalot","Pétunia","Serviette"]
+const listeMots=["Cachalot","Pétunia","Serviette"];
+const listePhrases=["Pas de panique !","La vie, l'univers et le reste", "Merci pour le poisson"]
 let score = 0
-let motUtilisateur=prompt("Entre le mot : " +listeMots[0])
-if (motUtilisateur === listeMots[0]){
-    score++
-} 
 
-motUtilisateur=prompt("Entre le mot : " +listeMots[1])
-if(motUtilisateur ===listeMots[1]){
-    score++
+let choix=prompt("Choisis entre 'mots' ou 'phrases'")
+while ( choix !== "mots" && choix !== "phrases"){
+    choix=prompt("Choisis entre 'mots' ou 'phrases'")
 }
 
-motUtilisateur=prompt("Entre le mot : "+listeMots[2])
-if(motUtilisateur === listeMots[2]){
-    score++
+if (choix==="mots"){
+for (let i = 0; i < listeMots.length; i++){
+    let motUtilisateur=prompt("entrez le mot : " +listeMots[i])
+    if (motUtilisateur === listeMots[i]) {
+        score ++
+    }
+}
+console.log("Votre score est de " +score+ " sur" + listeMots.length)
+}else{
+    for (let i=0; i<listePhrases.length;i++){
+        let motUtilisateur=prompt("Entrez le mot :" +listePhrases[i])
+        if (motUtilisateur=== listePhrases[i]) {
+            score ++
+        }
+    }
+    console.log("votre score est de " + score + " sur " + listePhrases.length)
 }
 
-console.log(score);
+
