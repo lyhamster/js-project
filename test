@@ -1,0 +1,5 @@
+let i=0
+let number=prompt('saisir un nombre entre 0 et 10')
+while (i <=10){
+    console.log(i.length)
+}
