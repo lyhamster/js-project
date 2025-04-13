@@ -3,13 +3,30 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="../js project/scripts/config.js"></script>
-        <script src="../js project/scripts/script.js"></script>
-        <script src="../js project/scripts/main.js"></script>
-    <title>Exemple de page</title>
+        <link href="style.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+        <title>AzerType</title>
 </head>
 <body>
-    <h1>Bienvenue sur ma page</h1>
-    <p>rajoutons du texte</p>
+    <h1>AzerType</h1>
+    <h2>L'application pour écrire plus vite !</h2>
+    <p>Azertype est une application en ligne pour apprendre à taper plus vite au clavier :) </p>
+    <div class="overall-framing">
+        <p>Choisissez votre option et tapez la proposition qui s'affiche dans le champ en-dessus.</p>
+        <div id="zoneProposition">
+            <form method="get" action="">
+                <input type="radio" name="select" value="mots" id="mots"><label for="mots">Mots</label>
+                <input type="radio" name="select" value="phrases" id="phrases"><label for="phrases">Phrases</label>
+            </form>
+        </div>
+        <div class="display-generatedtext">
+            <input type="text" name="generated-text" id="generated-text" size="30" maxlength="20">
+        </div>
+        <div class="user-insert">
+            <input type="text" name="usertypings" id="usertypings"> 
+            <input type="submit" value="Valider">
+        </div>
+        <p>le score???</p>
+    </div>
 </body>
 </html>

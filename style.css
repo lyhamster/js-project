@@ -1,0 +1,52 @@
+#zoneProposition span{
+    font-weight:bold;
+}
+
+body{
+    font-family: "Special Elite", system-ui;
+    color:orange;
+    font-weight: 10px;
+    font-size:16px;
+    margin:auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+ }
+
+ h1{
+    font-size:50px;
+    margin-bottom:20px;
+ }
+
+ h2{
+    font-size:25px;
+ }
+
+ p {
+    text-align: center;
+ }
+ .overall-framing{
+    background-color: pink;
+    width: 600px;
+    border-radius: 25px;
+    color:white;
+    padding:10px 60px 0px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    gap:16px;
+ }
+
+ input {
+    border-radius: 8px;
+    border:none;
+    padding:10px 20px;
+    background-color: white;
+    font-family:"Special Elite", system-ui; 
+    size:10px;
+ }
+ #generated-text{
+    padding: 30px 200px;
+ }
+
+
