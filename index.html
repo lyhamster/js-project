@@ -3,8 +3,11 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="../js project/scripts/main.js" defer></script>
         <link href="style.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+        
+       
         <title>AzerType</title>
 </head>
 <body>
@@ -13,10 +16,12 @@
     <p>Azertype est une application en ligne pour apprendre à taper plus vite au clavier :) </p>
     <div class="overall-framing">
         <p>Choisissez votre option et tapez la proposition qui s'affiche dans le champ en-dessus.</p>
-        <div id="zoneProposition">
+        <div class="zoneProposition">
             <form method="get" action="">
-                <input type="radio" name="select" value="mots" id="mots"><label for="mots">Mots</label>
-                <input type="radio" name="select" value="phrases" id="phrases"><label for="phrases">Phrases</label>
+                <input type="radio" name="select" value="1" id="mots">
+                <label for="mots">Mots</label>
+                <input type="radio" name="select" value="2" id="phrases">
+                <label for="phrases">Phrases</label>
             </form>
         </div>
         <div class="display-generatedtext">
@@ -24,9 +29,8 @@
         </div>
         <div class="user-insert">
             <input type="text" name="usertypings" id="usertypings"> 
-            <input type="submit" value="Valider">
+            <input type="submit" name="valider" id="valider">
         </div>
-        <p>le score???</p>
-    </div>
+        <p id="score">votre score est de : </p>
 </body>
 </html>
