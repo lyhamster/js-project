@@ -48,3 +48,13 @@ body{
  #generated-text{
     padding: 30px 200px;
  }
+
+ #submitButton:hover {
+    background:linear-gradient( hsl(324, 37%, 67%), hsl(4, 62%, 73%));
+    cursor:pointer;
+
+ }
+
+ #submitButton:active{
+    box-shadow: 2px 2px 5px #fc894d
+ }

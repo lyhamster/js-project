@@ -1,17 +1,21 @@
 function afficherResultat(score, nbMotsProposes){
-    console.log("Votre score est de " + score + " sur " + nbMotsProposes)
+    let spanScore=document.querySelector(".score span") 
+    let scoreDisplay=` ${score}/${nbMotsProposes}`
+    spanScore.innerHTML= scoreDisplay
 }
+
+
 function choisirPhrasesOuMots(){
-    let choix=("Choisir entre 'mots' ou 'phrases'")
+    let choix= prompt("Choisir entre 'mots' ou 'phrases'")
     while (choix !== "mots" && choix !== "phrases") {
-        choix =("Choisir entre 'mots' ou 'phrases'")
+        choix = prompt("Choisir entre 'mots' ou 'phrases'")
     }
     return choix
 }
 function lancerBoucleDeJeu(listePropositions){
     let score=0
     for (let i = 0; i < listePropositions.length; i++){
-        let motUtilisateur =("Entrez le mot : " + listePropositions[i])
+        let motUtilisateur = prompt("Entrez le mot : " + listePropositions[i])
         if (motUtilisateur === listePropositions[i]) {
             score++
         }
