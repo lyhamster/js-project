@@ -1,7 +1,5 @@
 function afficherResultat(score, nbMotsProposes){
-    let spanScore=document.querySelector(".score span") 
-    let scoreDisplay=` ${score}/${nbMotsProposes}`
-    spanScore.innerHTML= scoreDisplay
+    document.querySelector(".score span").innerHTML = `${score}/${nbMotsProposes}`;
 }
 
 
