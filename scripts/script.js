@@ -1,5 +1,5 @@
-function afficherResultat(score, nbMotsProposes){
-    document.querySelector("score span").innerHTML = `${score}/${nbMotsProposes}`;
+function afficherResultat(score,nbMotsProposes){
+    document.querySelector(".score span").innerHTML = `${score} /${nbMotsProposes}`
 }
 
 
@@ -27,32 +27,51 @@ function displayGeneratedWords(proposition){
 
 }
 
+
 function lancerJeu() {
     let score=0
-    let nbMotsProposes=0
     let i=0
+    let nbMotsProposes=0
+    
+    let propositionList=listeMots
 
     let inputUserTypings=document.getElementById("usertypings")
     let validateButton= document.getElementById("submitButton")
-
-    displayGeneratedWords(listeMots[i])
-    validateButton.addEventListener("click",() => {
-        console.log(inputUserTypings.value)
-        i++
-        displayGeneratedWords(listeMots[i])
-        if (i >= listeMots.length){
-            displayGeneratedWords("fin du game pétasse")
-            validateButton.disabled=true
-        }
-     
-           
-            
-    })
-
-
-   
+    displayGeneratedWords("fais ton choix bitch")
+    let radioChoice= document.querySelectorAll(".zoneProposition input")
+    for (let r=0; r<radioChoice.length; r++){
+        radioChoice[r].addEventListener("change",(event) =>{
+            console.log(event.target.value)
+            if(event.target.value === "mots"){
+                propositionList= listeMots
+            }
+            else{
+                propositionList=listePhrases
+            }
+    displayGeneratedWords(propositionList[i])
+        })
+    }
+  
     
 
+        
+    validateButton.addEventListener("click",() => {
+        if (inputUserTypings.value===propositionList[i]){
+            score++
+            nbMotsProposes=propositionList.length
+        } 
+        i++
+        displayGeneratedWords(propositionList[i])
+        console.log(inputUserTypings.value)
+        
+        inputUserTypings.value = ""
+        if (i >= propositionList.length){
+            displayGeneratedWords("fin du game pétasse")
+            validateButton.disabled=true
+            afficherResultat(score,nbMotsProposes)
+        }
+    })
+}
 
     // // if (choix === "mots") {
     //     score = lancerBoucleDeJeu(listeMots)
@@ -62,6 +81,4 @@ function lancerJeu() {
     // //     nbMotsProposes = listePhrases.length
     // // 
     
-    afficherResultat(score, nbMotsProposes)
-}
 
