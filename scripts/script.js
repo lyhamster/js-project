@@ -27,6 +27,9 @@ function displayGeneratedWords(proposition){
 
 }
 
+function selectAllRadio(){
+    return document.querySelectorAll(".zoneProposition input")
+}
 
 function lancerJeu() {
     let score=0
@@ -38,23 +41,7 @@ function lancerJeu() {
     let inputUserTypings=document.getElementById("usertypings")
     let validateButton= document.getElementById("submitButton")
     displayGeneratedWords("fais ton choix bitch")
-    let radioChoice= document.querySelectorAll(".zoneProposition input")
-    for (let r=0; r<radioChoice.length; r++){
-        radioChoice[r].addEventListener("change",(event) =>{
-            console.log(event.target.value)
-            if(event.target.value === "mots"){
-                propositionList= listeMots
-            }
-            else{
-                propositionList=listePhrases
-            }
-    displayGeneratedWords(propositionList[i])
-        })
-    }
   
-    
-
-        
     validateButton.addEventListener("click",() => {
         if (inputUserTypings.value===propositionList[i]){
             score++
@@ -71,14 +58,26 @@ function lancerJeu() {
             afficherResultat(score,nbMotsProposes)
         }
     })
+
+    selectAllRadio().forEach(radio => {
+        radio.addEventListener("change",(event) =>{
+            console.log(event.target.value)
+            if(event.target.value === "mots"){
+                propositionList=listeMots
+            }
+            else{
+                propositionList=listePhrases
+            }
+            displayGeneratedWords(propositionList[i])
+        })
+    })
+
+    selectAllRadio().forEach(radio => {
+        radio.addEventListener("click",()=>{
+            
+        })
+    })
+
+
 }
-
-    // // if (choix === "mots") {
-    //     score = lancerBoucleDeJeu(listeMots)
-    //     nbMotsProposes = listeMots.length
-    // // } else {
-    // //   //  score = lancerBoucleDeJeu(listePhrases)
-    // //     nbMotsProposes = listePhrases.length
-    // // 
-    
-
+  
