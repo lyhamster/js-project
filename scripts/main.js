@@ -1,1 +1,2 @@
-lancerJeu()
+lancerJeu();
+popupDisplay();

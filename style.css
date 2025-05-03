@@ -26,7 +26,7 @@ body{
  p {
     text-align: center;
  }
- .overall-framing{
+ .overall-framing, .overlay-popup,.popup-section, .size-container{
     background-color: pink;
     width: 600px;
     border-radius: 25px;
@@ -38,8 +38,13 @@ body{
     gap:16px;
  }
 
+.row-radioWords, .row-radioSentences, .row-formRadio, .user-insert{
+   display: flex;
+   flex-direction: row;
+   width: 90%;
+}
  input, .display-generatedtext{
-    border-radius: 8px;
+    border-radius: 20px;
     padding:10px 20px;
     border:none;
     background-color: white;
@@ -48,7 +53,8 @@ body{
  }
 
  .display-generatedtext{
-    padding: 30px 200px;
+    padding: 30px;
+    width: 80%;
     color:orange;
     transition:0.6s ease-out;
     text-align: center;
@@ -58,12 +64,58 @@ body{
    margin-left: 100px;
  }
 
- #submitButton:hover {
+ #sentButton:hover, #sharedButton:hover, #submitButton:hover {
     background:linear-gradient( hsl(324, 37%, 67%), hsl(4, 62%, 73%));
     cursor:pointer;
 
  }
 
+ #sharedButton{
+   padding:15px 25px;
+   margin-top:-15px;
+ }
+
+ #sentButton{
+   margin-top:10px;
+ }
+
  #submitButton:active{
     box-shadow: 2px 2px 5px #fc894d
  }
+
+ form, .boxname, .emailbox{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap:14px;
+   width: 55%;
+ }
+
+
+#email,#user-name{
+   width: 370%;
+}
+
+#usertypings{
+   width:74%;
+   height:20px;
+}
+
+.user-insert{
+   gap:10px;
+}
+
+.overlay-popup{
+   display: none;
+   position: absolute;
+   top: 40%;
+   gap:10px;
+   width: 270px;
+   height:270px;
+   box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, 0.2);
+   background: rgba(175, 95, 80, 1);
+}
+
+.emailbox label, .boxname label{
+   text-wrap: nowrap;
+}
