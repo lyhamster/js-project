@@ -44,16 +44,16 @@
             <input type="button" value="Partagez" id="sharedButton">
             <div class="overlay-popup">
                 <p class="gap">Partagez votre score</p>
-                <form>
+                <form id="shareForm">
                     <div class="boxname">
                     <label for="user-name">Votre nom</label>
                     <input type="text" name="user-name" id="user-name" placeholder="Votre nom">
                     </div>
                     <div class="emailbox">
                     <label for="email">Avec qui voulez-vous partager votre score?</label>
-                    <input type="email" id="email" name="email" id="email" autocomplete="email" placeholder="nom@exemple.com">
+                    <input type="email" id="email" name="email" autocomplete="email" placeholder="nom@exemple.com">
                     </div>
-                    <input type="button" value="Envoyer" id="sentButton">
+                    <input type="submit" value="Envoyer" id="sentButton">
                 </form>
             </div>
         </div>

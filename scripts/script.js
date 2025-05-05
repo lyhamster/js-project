@@ -68,7 +68,7 @@ function lancerJeu() {
                 propositionList=listePhrases;
             }
             displayGeneratedWords(propositionList[i]);
-        })
+        });
     });
 }
   
@@ -84,11 +84,38 @@ function resetGame () {
 function popupDisplay() {
     let shareResultBtn= document.getElementById("sharedButton");
     let overlayForm = document.querySelectorAll(".overlay-popup");
-    let closePopup = document.querySelector("body");
+    let sentForm= document.getElementById("shareForm");
 
     shareResultBtn.addEventListener("click",(event)=>{ 
         overlayForm.forEach((form)=>{
-        form.style.display="flex";
-        })
+            form.style.display="flex";
+        });
+        event.stopPropagation()
+    });
+
+    sentForm.addEventListener("submit",(event)=>{
+        event.preventDefault();
+        let name = document.getElementById("user-name").value;
+        let email = document.getElementById("email").value;
+
+        let score= document.querySelector(".score span");
+
+        console.log(name, email, score);
+       
     })
+
+    document.addEventListener("click",(event)=>{
+        let clickedOutside = true;
+        overlayForm.forEach((form) => {
+            if(form.contains(event.target)){
+                clickedOutside=false;
+            }
+        });
+            if (clickedOutside){
+                overlayForm.forEach((form) => {
+                form.style.display="none";
+                })
+            }
+    });  
 }
+
