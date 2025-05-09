@@ -5,8 +5,6 @@ let nbMotsProposes=0;
 let propositionList=listeMots;
 let gameFinished= false;
 
-
-
 let inputUserTypings=document.getElementById("usertypings");
 let validateButton= document.getElementById("submitButton");
 
@@ -95,12 +93,11 @@ function popupDisplay() {
 
     sentForm.addEventListener("submit",(event)=>{
         event.preventDefault();
-        let name = document.getElementById("user-name").value;
-        let email = document.getElementById("email").value;
-
-        let score= document.querySelector(".score span");
-
-        console.log(name, email, score);
+        let nameValue = document.getElementById("user-name").value
+        let email = document.getElementById("email").value
+    
+        openMailBox();
+        verifyName();
        
     })
 
@@ -119,3 +116,33 @@ function popupDisplay() {
     });  
 }
 
+function openMailBox () {
+    let name = document.getElementById("user-name").value
+    let email = document.getElementById("email").value
+    
+    const subjectLine ="Je partage mon score avec tuwa"
+    const scoreResult = `${score} sur ${nbMotsProposes}`
+    
+    const encodedSubject = encodeURIComponent(`${subjectLine}`)
+    const encodedBody= encodeURIComponent(`${name} a eu ${scoreResult} sur son jeu Azertype oh yeahh` )
+    
+
+    const mailtoLink=`mailto:${email}?subject=${encodedSubject}&body=${encodedBody}`    
+    window.location.href= mailtoLink;
+}
+
+function verifyName(){
+    let nameValue = document.getElementById("user-name").value;
+    let email = document.getElementById("email").value
+    let valueTrimed= nameValue.trim();
+    let regex = new RegExp("^[a-zA-Z]+$");
+    const errorMessage= "met ton prénom biatch"
+
+    if (!regex.test(valueTrimed)){
+        const errorMailNotice=`mailto:${email}?body=${encodeURIComponent(errorMessage)}`
+        window.location.href= errorMailNotice;
+    } 
+
+    
+
+}
