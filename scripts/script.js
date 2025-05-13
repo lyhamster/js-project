@@ -96,9 +96,12 @@ function popupDisplay() {
         let nameValue = document.getElementById("user-name").value
         let email = document.getElementById("email").value
     
-        openMailBox();
-        verifyName();
-       
+        if (verifyName(nameValue) && verifyEmail(email)){
+            openMailBox(nameValue,email);
+        } else {
+            console.log("erreur");
+        }
+
     })
 
     document.addEventListener("click",(event)=>{
@@ -116,33 +119,31 @@ function popupDisplay() {
     });  
 }
 
-function openMailBox () {
-    let name = document.getElementById("user-name").value
-    let email = document.getElementById("email").value
+function openMailBox (yourName, yourEmail) {
+    let subjectLine ="Je partage mon score avec tuwa";
+    let scoreResult = `${score} sur ${nbMotsProposes}`;
     
-    const subjectLine ="Je partage mon score avec tuwa"
-    const scoreResult = `${score} sur ${nbMotsProposes}`
+    let encodedSubject = encodeURIComponent(`${subjectLine}`);
+    let encodedBody= encodeURIComponent(`${yourName} a eu ${scoreResult} sur son jeu Azertype oh yeahh` );
     
-    const encodedSubject = encodeURIComponent(`${subjectLine}`)
-    const encodedBody= encodeURIComponent(`${name} a eu ${scoreResult} sur son jeu Azertype oh yeahh` )
-    
-
-    const mailtoLink=`mailto:${email}?subject=${encodedSubject}&body=${encodedBody}`    
+    let mailtoLink=`mailto:${yourEmail}?subject=${encodedSubject}&body=${encodedBody}`;    
     window.location.href= mailtoLink;
 }
 
-function verifyName(){
-    let nameValue = document.getElementById("user-name").value;
-    let email = document.getElementById("email").value
-    let valueTrimed= nameValue.trim();
-    let regex = new RegExp("^[a-zA-Z]+$");
-    const errorMessage= "met ton prénom biatch"
+function verifyName(firstName){
+    let correctNameRegExp = new RegExp("^[a-zA-Z]{2,}$");
 
-    if (!regex.test(valueTrimed)){
-        const errorMailNotice=`mailto:${email}?body=${encodeURIComponent(errorMessage)}`
-        window.location.href= errorMailNotice;
+    if (correctNameRegExp.test(firstName)){
+    return true;
+    }
+    return false;
+}
+
+function verifyEmail(mailValidity){
+    let isEmailValid = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+");
+   
+    if (isEmailValid.test(mailValidity)){ 
+    return true;
     } 
-
-    
-
+    return false;
 }
