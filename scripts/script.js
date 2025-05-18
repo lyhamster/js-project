@@ -1,10 +1,5 @@
 "use strict";
 // This file owns all functions necessary to make this game playable//
-let i=0;
-let nbMotsProposes=0;
-let propositionList=listeMots;
-let gameFinished= false;
-
 
 /**
  * This function display the result of the user
@@ -51,7 +46,7 @@ function verifyName(firstName){
 }
 
 /**
- * This function check if the email is 
+ * This function check if the email is valid
  * @param {*} mailValidity 
  */
 function verifyEmail(mailValidity){
@@ -67,6 +62,13 @@ function selectAllRadio(){
 }
 
 function lancerJeu() {
+    initAddEventListenerPopup();
+    let i=0;
+    let score = 0;
+    let nbMotsProposes=0;
+    let propositionList=listeMots;
+    let gameFinished= false;
+
    
     selectAllRadio().forEach(radio => {
         radio.addEventListener("change",(event) =>{
@@ -116,6 +118,18 @@ function lancerJeu() {
         });
     });
 
+    let sentForm = document.getElementById("shareForm")
+    sentForm.addEventListener("submit",(event)=>{
+        event.preventDefault();
+        let nameValue = document.getElementById("user-name").value
+        let email = document.getElementById("email").value
+    
+        if (verifyName(nameValue) && verifyEmail(email)){
+            openMailBox(nameValue,email);
+        } else {
+            console.log("erreur");
+        }
+    })
 }
   
 function resetGame () {
