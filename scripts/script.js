@@ -1,25 +1,70 @@
 "use strict";
-let score=0;
+// This file owns all functions necessary to make this game playable//
 let i=0;
 let nbMotsProposes=0;
 let propositionList=listeMots;
 let gameFinished= false;
 
-let inputUserTypings=document.getElementById("usertypings");
-let validateButton= document.getElementById("submitButton");
+
+/**
+ * This function display the result of the user
+ * @param {*} score : user's score
+ * @param {*} nbMotsProposes : number of words showed to the user to type
+ */
 
 function afficherResultat(score,nbMotsProposes){
     document.querySelector(".score span").innerHTML = `${score} /${nbMotsProposes}`;
 }
 
+/**
+ * This function display a words or sentences according what the user has picked. 
+ * In the zone "display-generatedtext"
+ * @param {*} proposition : the words or sentenced displayed
+ */
+
 function displayGeneratedWords(proposition){
     document.querySelector(".display-generatedtext").innerText= proposition;
+}
+
+/**
+ * This function build and display the email
+ * @param {*} yourName  : user name
+ * @param {*} yourEmail : email of the person with whom the user want to share the score.
+ * @param {*} score : the score 
+ */
+function openMailBox (yourName, yourEmail, score) {
+    let mailtoLink=`mailto:${yourEmail}?subject= Partage du score Azertype que Lyly a codé elle même &body= Yo bg, c'est ${yourName} et je viens de réaliser le score de ${score}, c kdo`;    
+    window.location.href= mailtoLink;
+}
+
+/**
+ * This function check if the name put in the form has at least two letters.
+ * @param {*} firstName : user name
+ * @returns 
+ */
+function verifyName(firstName){
+    let correctNameRegExp = new RegExp("^[a-zA-Z]{2,}$");
+
+    if (!correctNameRegExp.test(firstName))
+    throw new Error("The name should at least have 2 letters")
+   
+}
+
+/**
+ * This function check if the email is 
+ * @param {*} mailValidity 
+ */
+function verifyEmail(mailValidity){
+    let isEmailValid = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+");
+   
+    if (!isEmailValid.test(mailValidity)){ 
+    throw new Error("Error email is not valid")
+    }
 }
 
 function selectAllRadio(){
     return document.querySelectorAll(".zoneProposition input");
 }
-
 
 function lancerJeu() {
    
@@ -37,6 +82,8 @@ function lancerJeu() {
     });
 
     displayGeneratedWords("fais ton choix bitch");
+    let inputUserTypings=document.getElementById("usertypings");
+    let validateButton= document.getElementById("submitButton");
     validateButton.addEventListener("click",() => {
         if (inputUserTypings.value===propositionList[i]){
             score++;
@@ -68,6 +115,7 @@ function lancerJeu() {
             displayGeneratedWords(propositionList[i]);
         });
     });
+
 }
   
 function resetGame () {
@@ -77,73 +125,4 @@ function resetGame () {
     validateButton.disabled = false;
     gameFinished = false; 
    afficherResultat(0,0);
-}
-
-function popupDisplay() {
-    let shareResultBtn= document.getElementById("sharedButton");
-    let overlayForm = document.querySelectorAll(".overlay-popup");
-    let sentForm= document.getElementById("shareForm");
-
-    shareResultBtn.addEventListener("click",(event)=>{ 
-        overlayForm.forEach((form)=>{
-            form.style.display="flex";
-        });
-        event.stopPropagation()
-    });
-
-    sentForm.addEventListener("submit",(event)=>{
-        event.preventDefault();
-        let nameValue = document.getElementById("user-name").value
-        let email = document.getElementById("email").value
-    
-        if (verifyName(nameValue) && verifyEmail(email)){
-            openMailBox(nameValue,email);
-        } else {
-            console.log("erreur");
-        }
-
-    })
-
-    document.addEventListener("click",(event)=>{
-        let clickedOutside = true;
-        overlayForm.forEach((form) => {
-            if(form.contains(event.target)){
-                clickedOutside=false;
-            }
-        });
-            if (clickedOutside){
-                overlayForm.forEach((form) => {
-                form.style.display="none";
-                })
-            }
-    });  
-}
-
-function openMailBox (yourName, yourEmail) {
-    let subjectLine ="Je partage mon score avec tuwa";
-    let scoreResult = `${score} sur ${nbMotsProposes}`;
-    
-    let encodedSubject = encodeURIComponent(`${subjectLine}`);
-    let encodedBody= encodeURIComponent(`${yourName} a eu ${scoreResult} sur son jeu Azertype oh yeahh` );
-    
-    let mailtoLink=`mailto:${yourEmail}?subject=${encodedSubject}&body=${encodedBody}`;    
-    window.location.href= mailtoLink;
-}
-
-function verifyName(firstName){
-    let correctNameRegExp = new RegExp("^[a-zA-Z]{2,}$");
-
-    if (correctNameRegExp.test(firstName)){
-    return true;
-    }
-    return false;
-}
-
-function verifyEmail(mailValidity){
-    let isEmailValid = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+");
-   
-    if (isEmailValid.test(mailValidity)){ 
-    return true;
-    } 
-    return false;
 }

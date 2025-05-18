@@ -1,2 +1,1 @@
 lancerJeu();
-popupDisplay();
