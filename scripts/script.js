@@ -28,8 +28,8 @@ function displayGeneratedWords(proposition){
  * @param {*} score : the score 
  */
 function openMailBox (yourName, yourEmail, score) {
-    let mailtoLink=`mailto:${yourEmail}?subject= Partage du score Azertype que Lyly a codé elle même &body= Yo bg, c'est ${yourName} et je viens de réaliser le score de ${score}, c kdo`;    
-    window.location.href= mailtoLink;
+    let mailto=`mailto:${yourEmail}?subject= Partage du score Azertype que Lyly a codé elle même &body= Yo bg, c'est ${yourName} et je viens de réaliser le score de ${score}, c kdo`;    
+    window.location.href= mailto;
 }
 
 /**
@@ -38,9 +38,7 @@ function openMailBox (yourName, yourEmail, score) {
  * @returns 
  */
 function verifyName(firstName){
-    let correctNameRegExp = new RegExp("^[a-zA-Z]{2,}$");
-
-    if (!correctNameRegExp.test(firstName))
+    if (firstName.value.length <= 2)
     throw new Error("The name should at least have 2 letters")
    
 }
@@ -57,9 +55,14 @@ function verifyEmail(mailValidity){
     }
 }
 
+/**
+ * This function enables the user to pick between words or sentences before starting typings game
+ * @returns select both radios buttons
+ */
 function selectAllRadio(){
     return document.querySelectorAll(".zoneProposition input");
 }
+
 
 function lancerJeu() {
     initAddEventListenerPopup();
@@ -107,36 +110,25 @@ function lancerJeu() {
     selectAllRadio().forEach(radio=>{
         radio.addEventListener("click",(event)=>{
             if (gameFinished){
-                resetGame();
-            }
-            if(event.target.value==="mots"){
-                propositionList = listeMots;
-            }else{
-                propositionList=listePhrases;
-            }
-            displayGeneratedWords(propositionList[i]);
+                resetGame();}
         });
     });
 
     let sentForm = document.getElementById("shareForm")
     sentForm.addEventListener("submit",(event)=>{
         event.preventDefault();
-        let nameValue = document.getElementById("user-name").value
-        let email = document.getElementById("email").value
-    
-        if (verifyName(nameValue) && verifyEmail(email)){
-            openMailBox(nameValue,email);
-        } else {
-            console.log("erreur");
-        }
+        let nameInput = document.getElementById("user-name")
+        let emailInput = document.getElementById("email")
+
+        let emailValue= document.getElementById("email")
+        let nameValue = document.getElementById("user-name")
+        
+        // if (verifyName(nameInput) && verifyEmail(emailInput)){
+            openMailBox(nameValue,emailValue,`${score}/${i}`);
+        // }
     })
 }
   
 function resetGame () {
-    score = 0;
-    i = 0;
-    nbMotsProposes = 0;
-    validateButton.disabled = false;
-    gameFinished = false; 
-   afficherResultat(0,0);
+   window.location.reload()
 }
